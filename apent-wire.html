@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apent Holding — Invista bem, viva melhor.</title>
+<meta name="description" content="A holding que integra tecnologia, dados, assessoria e gestão para transformar como você investe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#01429C;--nyhavn:#39C6FE;--amarelo:#F2C538;
+  --salmo:#FFB490;--laranja:#FFA336;--cinza:#F3F3F3;
+  --preto:#192028;--branco:#FFFFFF;
+  --font:'Hanken Grotesk',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--preto);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* PROGRESS */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--nyhavn);width:0%;z-index:1001;transition:width .1s linear}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:2px;left:0;right:0;z-index:1000;
+  padding:0 52px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .3s ease,backdrop-filter .3s ease;
+}
+nav.scrolled{background:rgba(25,32,40,.96);backdrop-filter:blur(16px)}
+.nav-wordmark{font-size:21px;font-weight:300;color:#fff;letter-spacing:-.02em;flex-shrink:0}
+.nav-wordmark span{color:var(--nyhavn)}
+.nav-center{display:flex;gap:32px;align-items:center}
+.nav-link{font-size:13px;font-weight:400;color:rgba(255,255,255,.6);transition:color .2s;letter-spacing:.02em;white-space:nowrap}
+.nav-link:hover{color:#fff}
+.nav-cta{
+  background:var(--azul);color:#fff;
+  font-size:13px;font-weight:500;letter-spacing:.03em;
+  padding:10px 22px;border-radius:3px;
+  transition:background .2s;white-space:nowrap;
+}
+.nav-cta:hover{background:#0251bb}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;background:var(--preto);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:140px 24px 100px;
+}
+.hero-bg-geo{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:800px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:10px;font-weight:500;letter-spacing:.3em;
+  color:var(--nyhavn);margin-bottom:32px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;height:1px;width:28px;background:var(--nyhavn);opacity:.4}
+.hero-h1{
+  font-size:clamp(52px,7.5vw,96px);
+  font-weight:300;line-height:1.0;letter-spacing:-.04em;
+  color:#fff;margin-bottom:32px;
+}
+.hero-h1 em{font-style:normal;color:var(--nyhavn);font-weight:300}
+.hero-sub{
+  font-size:clamp(15px,1.8vw,19px);font-weight:300;line-height:1.7;
+  color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 52px;
+}
+.btn-primary{
+  display:inline-block;background:var(--azul);color:#fff;
+  font-size:14px;font-weight:500;letter-spacing:.04em;
+  padding:17px 44px;border-radius:3px;transition:background .2s;
+}
+.btn-primary:hover{background:#0251bb}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.hero-scroll-label{font-size:9px;letter-spacing:.25em;color:rgba(255,255,255,.25);font-weight:500}
+.hero-scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,rgba(57,198,254,.5),transparent)}
+
+/* ── ORIGEM ── */
+#origem{background:#fff}
+#origem-inner{padding:128px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto}
+.sec-eyebrow{font-size:10px;font-weight:500;letter-spacing:.28em;color:var(--azul);margin-bottom:22px;display:block}
+.sec-title{font-size:clamp(30px,3.6vw,46px);font-weight:300;line-height:1.12;letter-spacing:-.03em;color:var(--preto);margin-bottom:20px}
+.sec-body{font-size:17px;font-weight:300;line-height:1.75;color:rgba(25,32,40,.65)}
+.timeline{display:flex;flex-direction:column}
+.tl-item{
+  display:grid;grid-template-columns:44px 1fr;align-items:start;
+  padding:26px 0;border-bottom:1px solid rgba(25,32,40,.07);
+  opacity:0;transform:translateX(14px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.tl-item:last-child{border-bottom:none}
+.tl-item.visible{opacity:1;transform:none}
+.tl-left{display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:3px}
+.tl-year-num{font-size:10px;font-weight:500;color:rgba(25,32,40,.3);letter-spacing:.05em}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:rgba(25,32,40,.15);flex-shrink:0}
+.tl-item.visible .tl-dot{background:var(--azul)}
+.tl-item.now .tl-dot{width:10px;height:10px;background:var(--laranja)}
+.tl-title{font-size:16px;font-weight:500;color:var(--preto);margin-bottom:5px;line-height:1.25}
+.tl-desc{font-size:14px;font-weight:300;color:rgba(25,32,40,.6);line-height:1.6}
+
+/* ── FAIXA NÓRDICA ── */
+.nordic-stripe{height:3px;background:linear-gradient(90deg,var(--nyhavn) 0%,var(--amarelo) 33%,var(--salmo) 66%,var(--laranja) 100%)}
+
+/* ── ECOSSISTEMA ── */
+#ecossistema{background:var(--preto);padding:120px 0 0}
+.eco-header{text-align:center;padding:0 56px;margin-bottom:72px}
+.eco-header .sec-eyebrow{color:var(--nyhavn)}
+.eco-header .sec-title{color:#fff}
+.eco-header .sec-body{color:rgba(255,255,255,.45);max-width:500px;margin:12px auto 0}
+
+/* Duas colunas mesma altura */
+.eco-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:stretch; /* mesma altura */
+}
+
+/* Coluna base */
+.eco-col{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.eco-col-plat{background:#09182B}
+.eco-col-asses{background:#1A0E06}
+
+/* ── CARROSSEL INTERNO (plataforma) ── */
+.eco-carousel{
+  position:relative;flex:1;overflow:hidden;
+  min-height:0; /* permite encolher */
+}
+.eco-carousel-track{
+  display:flex;height:100%;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.eco-slide{
+  min-width:100%;height:100%;position:relative;flex-shrink:0;
+}
+
+/* Imagem que transborda — ocupa a coluna inteira */
+.eco-slide-img{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.eco-img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;letter-spacing:.2em;font-weight:500;
+}
+.eco-img-placeholder.plat{
+  background:linear-gradient(160deg,rgba(1,66,156,.4) 0%,rgba(57,198,254,.1) 100%);
+  color:rgba(57,198,254,.3);
+}
+.eco-img-placeholder.asses{
+  background:linear-gradient(160deg,rgba(255,163,54,.25) 0%,rgba(255,180,144,.12) 100%);
+  color:rgba(255,163,54,.3);
+}
+
+/* Overlay gradiente sobre a imagem para o texto */
+.eco-slide-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(9,24,43,.95) 0%, rgba(9,24,43,.6) 55%, transparent 100%);
+}
+.eco-slide-overlay.asses{
+  background:linear-gradient(to top, rgba(26,14,6,.97) 0%, rgba(26,14,6,.65) 55%, transparent 100%);
+}
+
+/* Texto flutuando sobre a imagem, na parte de baixo */
+.eco-slide-text{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:40px 40px 36px;
+}
+.eco-slide-brand{font-size:20px;font-weight:500;letter-spacing:-.01em;margin-bottom:10px}
+.eco-slide-brand.plat{color:var(--nyhavn)}
+.eco-slide-brand.asses{color:var(--laranja)}
+.eco-slide-desc{font-size:13px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.6);margin-bottom:14px}
+.eco-stat-line{font-size:11px;font-weight:400;color:rgba(255,255,255,.3);margin-bottom:16px}
+.eco-stat-line strong{font-weight:600}
+.eco-stat-line.plat strong{color:var(--nyhavn)}
+.eco-stat-line.asses strong{color:var(--laranja)}
+.eco-slide-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;letter-spacing:.04em;
+  transition:gap .2s;
+}
+.eco-slide-cta.plat{color:var(--nyhavn)}
+.eco-slide-cta.asses{color:var(--laranja)}
+.eco-slide-cta:hover{gap:10px}
+.eco-slide-cta::after{content:'→'}
+
+/* Header da coluna (acima do carrossel) */
+.eco-col-header{
+  padding:52px 40px 32px;
+  flex-shrink:0;
+}
+.eco-col-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;font-weight:700;letter-spacing:.3em;margin-bottom:14px;
+}
+.eco-col-tag-dot{width:5px;height:5px;border-radius:50%}
+.eco-col-tag.plat{color:var(--nyhavn)}.eco-col-tag.plat .eco-col-tag-dot{background:var(--nyhavn)}
+.eco-col-tag.asses{color:var(--laranja)}.eco-col-tag.asses .eco-col-tag-dot{background:var(--laranja)}
+.eco-col-heading{font-size:26px;font-weight:300;line-height:1.2;letter-spacing:-.025em;color:#fff;margin-bottom:10px}
+.eco-col-sub{font-size:13px;font-weight:300;line-height:1.6;color:rgba(255,255,255,.4)}
+
+/* Dots do carrossel */
+.eco-dots{
+  position:absolute;bottom:16px;right:20px;
+  display:flex;gap:6px;z-index:10;
+}
+.eco-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;
+  transition:background .2s,transform .2s;
+  border:none;padding:0;
+}
+.eco-dot.active{background:var(--nyhavn);transform:scale(1.3)}
+
+/* Seta do carrossel */
+.eco-arrow{
+  position:absolute;bottom:12px;left:40px;
+  display:flex;gap:6px;z-index:10;
+}
+.eco-arr-btn{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:none;
+  color:rgba(255,255,255,.7);font-size:12px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.eco-arr-btn:hover{background:rgba(255,255,255,.2)}
+
+/* Coluna assessoria (sem carrossel, imagem única) */
+.eco-col-single{
+  flex:1;position:relative;overflow:hidden;min-height:500px;
+}
+
+/* ── NÚMEROS ── */
+#numeros{background:var(--azul);padding:52px 56px}
+.num-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.num-divider{width:1px;height:40px;background:rgba(255,255,255,.15);flex-shrink:0;margin:0 4px}
+.num-item{text-align:center;padding:0 28px;opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
+.num-item.visible{opacity:1;transform:none}
+.num-val{font-size:clamp(26px,3vw,38px);font-weight:300;letter-spacing:-.03em;color:var(--amarelo);display:block;line-height:1;margin-bottom:5px}
+.num-label{font-size:11px;font-weight:400;color:rgba(255,255,255,.45);letter-spacing:.04em;white-space:nowrap}
+
+/* ── SÓCIOS ── */
+#socios{background:#fff;padding:120px 56px}
+.socios-header{text-align:center;margin-bottom:60px}
+.socios-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.socio-card{
+  padding:24px 20px;border-radius:10px;border:1px solid rgba(25,32,40,.07);
+  display:flex;flex-direction:column;gap:8px;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .5s ease,transform .5s ease,border-color .2s;
+}
+.socio-card.visible{opacity:1;transform:none}
+.socio-card:hover{transform:translateY(-3px)!important;border-color:rgba(1,66,156,.18)}
+.socio-card.placeholder{border-style:dashed;opacity:.25!important;transform:none!important;pointer-events:none}
+.socio-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.socio-name{font-size:15px;font-weight:500;color:var(--preto)}
+.socio-cargo{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--azul);text-transform:uppercase}
+.socio-bio{font-size:12px;font-weight:300;color:rgba(25,32,40,.55);line-height:1.55;flex:1}
+.socio-tag{display:inline-block;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em;margin-top:4px;width:fit-content}
+.socio-tag.plat{background:rgba(57,198,254,.12);color:var(--azul)}
+.socio-tag.asses{background:rgba(255,163,54,.15);color:#7A3F00}
+.socio-tag.hold{background:rgba(1,66,156,.08);color:var(--azul)}
+
+/* ── CTA + FOOTER ── */
+#cta-footer{background:var(--preto);position:relative;overflow:hidden}
+.cta-accent{height:3px;background:linear-gradient(90deg,var(--nyhavn),var(--amarelo),var(--salmo),var(--laranja))}
+.cta-deco{position:absolute;right:-80px;top:-120px;width:440px;height:440px;border-radius:50%;border:1px solid rgba(57,198,254,.05);pointer-events:none}
+.cta-deco::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(242,197,56,.04)}
+.cta-deco-half{position:absolute;left:-60px;bottom:-80px;width:280px;height:140px;border-radius:140px 140px 0 0;border:1px solid rgba(255,163,54,.06);pointer-events:none}
+
+.cta-main{
+  padding:100px 56px 64px;max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;
+  position:relative;z-index:2;
+}
+.cta-left .sec-eyebrow{color:var(--nyhavn)}
+.cta-title{font-size:clamp(34px,4.5vw,58px);font-weight:300;line-height:1.05;letter-spacing:-.04em;color:#fff;margin-bottom:16px}
+.cta-title em{font-style:normal;color:var(--nyhavn);font-weight:300}
+.cta-sub{font-size:17px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.45);margin-bottom:44px;max-width:460px}
+.cta-right{display:flex;flex-direction:column;gap:0}
+.cta-proof-item{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:14px}
+.cta-proof-item:last-child{border-bottom:none}
+.cta-proof-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:7px}
+.cta-proof-text{font-size:14px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.55}
+.cta-proof-text strong{font-weight:500;color:rgba(255,255,255,.75)}
+
+.footer-bar{border-top:1px solid rgba(255,255,255,.06);padding:20px 56px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:2}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);font-weight:300}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:11px;color:rgba(255,255,255,.2);transition:color .2s;font-weight:300}
+.footer-links a:hover{color:rgba(255,255,255,.5)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  #origem-inner{grid-template-columns:1fr;padding:80px 28px;gap:48px}
+  .eco-cols{grid-template-columns:1fr}
+  .eco-col-single{min-height:420px}
+  #numeros{padding:40px 28px}
+  .num-divider{display:none}
+  .num-item{padding:12px 16px}
+  .socios-grid{grid-template-columns:repeat(2,1fr)}
+  .cta-main{grid-template-columns:1fr;gap:40px;padding:72px 28px 48px}
+  nav{padding:0 24px}
+  .footer-bar{flex-direction:column;padding:20px 28px;text-align:center;gap:10px}
+  .eco-header{padding:0 28px}
+  .eco-col-header{padding:40px 28px 24px}
+  .eco-slide-text{padding:28px}
+}
+@media(max-width:600px){
+  .socios-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .nav-center{display:none}
+  .num-inner{flex-direction:column;gap:0}
+  .num-item{padding:14px 0;width:100%;border-bottom:1px solid rgba(255,255,255,.08)}
+  .num-item:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-wordmark">ā<span>pent</span></a>
+  <div class="nav-center">
+    <a href="#origem" class="nav-link">Nossa história</a>
+    <a href="#ecossistema" class="nav-link">O ecossistema</a>
+  </div>
+  <a href="#cta-footer" class="nav-cta">Fale conosco</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <svg class="hero-bg-geo" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="1200" cy="160" r="180" stroke="#39C6FE" stroke-width="1" opacity=".14"/>
+    <line x1="1020" y1="80" x2="1380" y2="80" stroke="#39C6FE" stroke-width="1" opacity=".07"/>
+    <line x1="1024" y1="102" x2="1376" y2="102" stroke="#39C6FE" stroke-width="1" opacity=".07"/>
+    <line x1="1034" y1="124" x2="1366" y2="124" stroke="#39C6FE" stroke-width="1" opacity=".07"/>
+    <line x1="1050" y1="146" x2="1350" y2="146" stroke="#39C6FE" stroke-width="1" opacity=".07"/>
+    <line x1="1072" y1="168" x2="1328" y2="168" stroke="#39C6FE" stroke-width="1" opacity=".06"/>
+    <line x1="1100" y1="190" x2="1300" y2="190" stroke="#39C6FE" stroke-width="1" opacity=".06"/>
+    <line x1="1132" y1="212" x2="1268" y2="212" stroke="#39C6FE" stroke-width="1" opacity=".05"/>
+    <path d="M -40 900 A 240 240 0 0 1 440 900" stroke="#F2C538" stroke-width="1" opacity=".1" fill="none"/>
+    <path d="M 30 900 A 170 170 0 0 1 370 900" stroke="#F2C538" stroke-width="1" opacity=".06" fill="none"/>
+    <path d="M0 520 Q180 480 360 520 Q540 560 720 520 Q900 480 1080 520 Q1260 560 1440 520" stroke="#39C6FE" stroke-width="1" opacity=".05" fill="none"/>
+    <path d="M0 548 Q180 508 360 548 Q540 588 720 548 Q900 508 1080 548 Q1260 588 1440 548" stroke="#39C6FE" stroke-width="1" opacity=".035" fill="none"/>
+    <circle cx="1360" cy="800" r="90" stroke="#FFB490" stroke-width="1" opacity=".09" fill="none"/>
+    <circle cx="1452" cy="800" r="90" stroke="#FFB490" stroke-width="1" opacity=".07" fill="none"/>
+    <circle cx="118" cy="118" r="58" stroke="#F2C538" stroke-width="1" opacity=".09" fill="none"/>
+    <line x1="360" y1="0" x2="360" y2="900" stroke="rgba(255,255,255,.012)" stroke-width="1"/>
+    <line x1="720" y1="0" x2="720" y2="900" stroke="rgba(255,255,255,.012)" stroke-width="1"/>
+    <line x1="1080" y1="0" x2="1080" y2="900" stroke="rgba(255,255,255,.012)" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1440" y2="300" stroke="rgba(255,255,255,.012)" stroke-width="1"/>
+    <line x1="0" y1="600" x2="1440" y2="600" stroke="rgba(255,255,255,.012)" stroke-width="1"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">APENT HOLDING</div>
+    <h1 class="hero-h1">Invista bem,<br><em>viva melhor.</em></h1>
+    <p class="hero-sub">O ecossistema financeiro que conecta tecnologia, dados e assessoria para transformar como você investe.</p>
+    <a href="#ecossistema" class="btn-primary">Conheça o ecossistema</a>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="hero-scroll-label">SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ORIGEM -->
+<section id="origem">
+  <div id="origem-inner">
+    <div class="reveal">
+      <span class="sec-eyebrow">A NOVA FASE</span>
+      <h2 class="sec-title">Do maior canal de FIIs do Brasil ao ecossistema completo.</h2>
+      <p class="sec-body">O Clube FII construiu a maior plataforma de cobertura de Fundos Imobiliários do país. A Apent é o próximo passo — uma holding que integra tecnologia, dados, distribuição e assessoria em uma estrutura única, preparada para capturar valor em toda a cadeia do investidor.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-year-num">2017</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title">Clube FII nasce</div><div class="tl-desc">A principal plataforma de cobertura de Fundos Imobiliários do Brasil — construída sobre dados, análise e comunidade.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-year-num">2025</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title">Virada estratégica</div><div class="tl-desc">+41% de crescimento YoY. EBITDA acima de 50%. Início da vertical transacional e da solução White Label B2B2C.</div></div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-left"><span class="tl-year-num" style="color:var(--laranja)">2026</span><div class="tl-dot"></div></div>
+        <div><div class="tl-title" style="color:var(--azul)">Nasce a Apent Holding</div><div class="tl-desc">A holding que integra tecnologia, assessoria e gestão. R$&nbsp;3,2B sob custódia. 46 mil clientes. Uma nova fase começa.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="nordic-stripe"></div>
+
+<!-- ECOSSISTEMA -->
+<section id="ecossistema">
+  <div class="eco-header reveal">
+    <span class="sec-eyebrow">O GRUPO APENT</span>
+    <h2 class="sec-title" style="color:#fff">Um ecossistema construído para crescer.</h2>
+    <p class="sec-body">Cada frente conectada. Cada especialista no lugar certo. Da tecnologia à alocação — tudo integrado.</p>
+  </div>
+
+  <div class="eco-cols">
+
+    <!-- COLUNA PLATAFORMA com carrossel -->
+    <div class="eco-col eco-col-plat">
+      <div class="eco-col-header">
+        <div class="eco-col-tag plat"><div class="eco-col-tag-dot"></div>PLATAFORMA</div>
+        <h3 class="eco-col-heading">Tecnologia e<br>dados em escala.</h3>
+        <p class="eco-col-sub">Infraestrutura proprietária que conecta conteúdo, comunidade e distribuição de produtos financeiros.</p>
+      </div>
+
+      <!-- Carrossel -->
+      <div class="eco-carousel" id="carousel-plat" style="flex:1;min-height:480px">
+        <div class="eco-carousel-track" id="carousel-track">
+          <!-- Slide 1: Clube FII -->
+          <div class="eco-slide">
+            <div class="eco-slide-img">
+              <div class="eco-img-placeholder plat">IMAGEM CLUBE FII</div>
+            </div>
+            <div class="eco-slide-overlay"></div>
+            <div class="eco-slide-text">
+              <div class="eco-slide-brand plat">Clube FII</div>
+              <p class="eco-slide-desc">A principal plataforma de cobertura de FIIs do Brasil. Dados em tempo real, carteiras integradas B3 e a maior comunidade de investidores em fundos imobiliários do país.</p>
+              <div class="eco-stat-line plat"><strong>+75 mil</strong> carteiras monitoradas &nbsp;·&nbsp; <strong>+R$&nbsp;8B</strong> em AUC virtual</div>
+              <a href="#" class="eco-slide-cta plat">Conheça mais</a>
+            </div>
+          </div>
+          <!-- Slide 2: Apent Tech -->
+          <div class="eco-slide">
+            <div class="eco-slide-img">
+              <div class="eco-img-placeholder plat">IMAGEM APENT TECH</div>
+            </div>
+            <div class="eco-slide-overlay"></div>
+            <div class="eco-slide-text">
+              <div class="eco-slide-brand plat" style="color:rgba(57,198,254,.75)">Apent Tech</div>
+              <p class="eco-slide-desc">Infraestrutura White Label B2B2C para criação, distribuição e monetização de produtos financeiros em escala. A camada tecnológica que opera além das marcas do grupo.</p>
+              <div class="eco-stat-line plat"><strong>White Label</strong> disponível para parceiros institucionais</div>
+              <a href="#" class="eco-slide-cta plat">Conheça mais</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles do carrossel -->
+        <div class="eco-arrow">
+          <button class="eco-arr-btn" id="arr-prev" onclick="moveCarousel(-1)">‹</button>
+          <button class="eco-arr-btn" id="arr-next" onclick="moveCarousel(1)">›</button>
+        </div>
+        <div class="eco-dots">
+          <button class="eco-dot active" id="dot-0" onclick="goToSlide(0)"></button>
+          <button class="eco-dot" id="dot-1" onclick="goToSlide(1)"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUNA ASSESSORIA — imagem única fullbleed -->
+    <div class="eco-col eco-col-asses">
+      <div class="eco-col-header">
+        <div class="eco-col-tag asses"><div class="eco-col-tag-dot"></div>ASSESSORIA, CONSULTORIA &amp; GESTÃO</div>
+        <h3 class="eco-col-heading">O que os grandes<br>bancos não oferecem.</h3>
+        <p class="eco-col-sub">Curadoria humana de ativos alternativos — para quem quer mais do que uma prateleira genérica.</p>
+      </div>
+
+      <div class="eco-col-single" style="flex:1;min-height:480px">
+        <div class="eco-slide-img" style="position:absolute;inset:0">
+          <div class="eco-img-placeholder asses" style="width:100%;height:100%">IMAGEM AUTEM</div>
+        </div>
+        <div class="eco-slide-overlay asses" style="position:absolute;inset:0"></div>
+        <div class="eco-slide-text" style="position:absolute;bottom:0;left:0;right:0;padding:40px">
+          <div class="eco-slide-brand asses">Autem Investimentos</div>
+          <p class="eco-slide-desc">Assessoria que democratiza o acesso a ativos de alta qualidade. Curadoria isenta, relatórios exclusivos e atendimento contínuo — sem precisar ser do mercado financeiro.</p>
+          <div class="eco-stat-line asses"><strong>R$&nbsp;3,2B</strong> sob custódia &nbsp;·&nbsp; <strong>46 mil+</strong> clientes</div>
+          <a href="#" class="eco-slide-cta asses">Conheça mais</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="nordic-stripe"></div>
+
+<!-- NÚMEROS -->
+<section id="numeros">
+  <div class="num-inner">
+    <div class="num-item"><span class="num-val" data-target="3.2" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;3,2B</span><span class="num-label">Sob custódia · Autem</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="46" data-suffix=" mil+">46 mil+</span><span class="num-label">Clientes ativos</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="8" data-prefix="+R$&nbsp;" data-suffix="B">+R$&nbsp;8B</span><span class="num-label">AUC virtual · Clube FII</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="41" data-suffix="%">41%</span><span class="num-label">Crescimento YoY 2025</span></div>
+    <div class="num-divider"></div>
+    <div class="num-item"><span class="num-val" data-target="10" data-prefix="R$&nbsp;" data-suffix="B">R$&nbsp;10B</span><span class="num-label">Meta de patrimônio</span></div>
+  </div>
+</section>
+
+<!-- SÓCIOS -->
+<section id="socios">
+  <div class="socios-header reveal">
+    <span class="sec-eyebrow">O TIME</span>
+    <h2 class="sec-title">Quem está por trás da Apent.</h2>
+    <p style="max-width:400px;margin:12px auto 0;font-size:16px;font-weight:300;color:rgba(25,32,40,.5);line-height:1.6">Experiência que constrói convicção.</p>
+  </div>
+  <div class="socios-grid">
+    <div class="socio-card"><div class="socio-avatar" style="background:var(--azul)">FG</div><div class="socio-name">Felipe Guinle</div><div class="socio-cargo">Sócio &amp; CEO</div><p class="socio-bio">Liderança e visão estratégica do grupo.</p><span class="socio-tag hold">Holding</span></div>
+    <div class="socio-card"><div class="socio-avatar" style="background:#0D3A6B">CP</div><div class="socio-name">Celson Plácido</div><div class="socio-cargo">CIO</div><p class="socio-bio">Ex-Partner XP e CIO Warren Brasil. 25+ anos em gestão e asset management.</p><span class="socio-tag asses">Assessoria</span></div>
+    <div class="socio-card"><div class="socio-avatar" style="background:#B85C00">PM</div><div class="socio-name">Prof. Mira</div><div class="socio-cargo">Sócio Investidor</div><p class="socio-bio">Fundador da Autem. Educador financeiro e referência em fundos imobiliários.</p><span class="socio-tag asses">Assessoria</span></div>
+    <div class="socio-card placeholder"><div class="socio-avatar" style="background:#ccc">?</div><div class="socio-name">A Confirmar</div><div class="socio-cargo">Cargo</div><p class="socio-bio">Bio a ser fornecida.</p></div>
+    <div class="socio-card placeholder"><div class="socio-avatar" style="background:#ccc">?</div><div class="socio-name">A Confirmar</div><div class="socio-cargo">Cargo</div><p class="socio-bio">Bio a ser fornecida.</p></div>
+    <div class="socio-card placeholder"><div class="socio-avatar" style="background:#ccc">?</div><div class="socio-name">A Confirmar</div><div class="socio-cargo">Cargo</div><p class="socio-bio">Bio a ser fornecida.</p></div>
+    <div class="socio-card placeholder"><div class="socio-avatar" style="background:#ccc">?</div><div class="socio-name">A Confirmar</div><div class="socio-cargo">Cargo</div><p class="socio-bio">Bio a ser fornecida.</p></div>
+    <div class="socio-card placeholder"><div class="socio-avatar" style="background:#ccc">?</div><div class="socio-name">A Confirmar</div><div class="socio-cargo">Cargo</div><p class="socio-bio">Bio a ser fornecida.</p></div>
+  </div>
+</section>
+
+<!-- CTA + FOOTER -->
+<section id="cta-footer">
+  <div class="cta-accent"></div>
+  <div class="cta-deco"></div>
+  <div class="cta-deco-half"></div>
+  <div class="cta-main">
+    <div class="cta-left reveal">
+      <span class="sec-eyebrow">FALE CONOSCO</span>
+      <h2 class="cta-title">Invista para<br><em>viver melhor.</em><br>Saiba como.</h2>
+      <p class="cta-sub">Conectamos você à inteligência certa para cada etapa da sua jornada. Dados, plataforma e assessoria — tudo em um ecossistema.</p>
+      <a href="mailto:contato@apent.com.br" class="btn-primary">Fale conosco</a>
+    </div>
+    <div class="cta-right reveal" style="transition-delay:.2s">
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--nyhavn)"></div><div class="cta-proof-text">Acesse dados reais de <strong>+75 mil carteiras</strong> de FIIs integradas à B3 via Clube FII.</div></div>
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--laranja)"></div><div class="cta-proof-text">Invista com assessores que já cuidam de <strong>R$&nbsp;3,2 bilhões</strong> para 46 mil clientes na Autem.</div></div>
+      <div class="cta-proof-item"><div class="cta-proof-dot" style="background:var(--amarelo)"></div><div class="cta-proof-text">Faça parte de um grupo com a meta de chegar a <strong>R$&nbsp;10 bilhões</strong> sob gestão.</div></div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span class="footer-copy">© 2026 Apent Holding®. Todos os direitos reservados.</span>
+    <div class="footer-links"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+  </div>
+</section>
+
+<script>
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  document.getElementById('progress').style.width=(el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+});
+
+/* NAV */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80);
+});
+
+/* IO GERAL */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.num-item,.socio-card:not(.placeholder)').forEach((el,i)=>{
+  if(!el.style.transitionDelay) el.style.transitionDelay=(i*.06)+'s';
+  io.observe(el);
+});
+
+/* TIMELINE */
+const tlIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.3});
+document.querySelectorAll('.tl-item').forEach((el,i)=>{el.style.transitionDelay=(i*.15)+'s';tlIO.observe(el)});
+
+/* CARROSSEL */
+let current=0;
+const total=2;
+let autoTimer;
+
+function goToSlide(n){
+  current=n;
+  document.getElementById('carousel-track').style.transform=`translateX(-${current*100}%)`;
+  document.querySelectorAll('.eco-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+}
+function moveCarousel(dir){
+  goToSlide((current+dir+total)%total);
+  resetAuto();
+}
+function resetAuto(){
+  clearInterval(autoTimer);
+  autoTimer=setInterval(()=>moveCarousel(1),4000);
+}
+resetAuto();
+
+/* COUNTER */
+function countTo(el,target,prefix,suffix,dur){
+  const start=performance.now();
+  const isFloat=String(target).includes('.');
+  const num=parseFloat(target);
+  function tick(now){
+    const p=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=isFloat?(num*ease).toFixed(1):Math.round(num*ease);
+    el.innerHTML=(prefix||'')+val+(suffix||'');
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const numIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.num-item').forEach((item,i)=>{
+        item.classList.add('visible');
+        const v=item.querySelector('.num-val');
+        if(v&&v.dataset.target) setTimeout(()=>countTo(v,v.dataset.target,v.dataset.prefix,v.dataset.suffix,1300),i*100);
+      });
+      numIO.disconnect();
+    }
+  });
+},{threshold:.4});
+numIO.observe(document.getElementById('numeros'));
+
+/* EQUALIZE HEIGHTS das colunas eco */
+function eqColHeights(){
+  const cols=document.querySelectorAll('.eco-col');
+  cols.forEach(c=>c.style.minHeight='');
+  if(window.innerWidth>960){
+    let max=0;
+    cols.forEach(c=>{max=Math.max(max,c.offsetHeight)});
+    cols.forEach(c=>c.style.minHeight=max+'px');
+  }
+}
+window.addEventListener('resize',eqColHeights);
+window.addEventListener('load',eqColHeights);
+setTimeout(eqColHeights,200);
+</script>
+</body>
+</html>
